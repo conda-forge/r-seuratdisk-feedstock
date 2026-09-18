@@ -1,18 +1,17 @@
 {% set name = "r-seuratdisk" %}
-{% set version = "0.0.9019" %}
-{% set sha256 = "a3d1406ab186c8c9cdf8aa2a0f9a43e3b8941411ba67eb07641180c21d803a74" %}
+{% set version = "0.0.9021" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/mojaveazure/seurat-disk/archive/163f1aade5bac38ed1e9e9c912283a7e74781610.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/mojaveazure/seurat-disk/archive/877d4e18ab38c686f5db54f8cd290274ccdbe295.tar.gz
+  sha256: d2d6b6604e8a1f6de90956d0401d34b51b07b30671a445d0e06876f2dec999ac
 
 build:
+  noarch: generic
   number: 0
-  skip: true  # [win]
   rpaths:
     - lib/R/lib/
     - lib/
@@ -20,7 +19,10 @@ build:
 
 requirements:
     host:
-        - r-seurat >=3.2.0
+        - r-base
+        - r-cli
+        - r-seurat
+        - r-seuratobject >=3.2.0
         - r-devtools
         - r-crayon
         - r-hdf5r
@@ -30,7 +32,10 @@ requirements:
         - r-stringi
         - r-withr
     run:
-        - r-seurat >=3.2.0
+        - r-base
+        - r-cli
+        - r-seurat
+        - r-seuratobject >=3.2.0
         - r-crayon
         - r-hdf5r
         - r-matrix
@@ -38,8 +43,6 @@ requirements:
         - r-rlang
         - r-stringi
         - r-withr
-        - r-spatstat.core
-        - r-spatstat <2.0
 
 test:
     commands:
@@ -61,7 +64,7 @@ about:
         spatial coordinates and image data, and cluster labels. We also support 
         rapid and on-disk conversion between h5Seurat and AnnData objects, 
         with the goal of enhancing interoperability between Seurat and Scanpy. 
-  license_family: GPL
 extra:
   recipe-maintainers:
+    - danielnachun
     - pcm32
